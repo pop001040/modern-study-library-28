@@ -4,21 +4,21 @@
 
 @layer base {
   :root {
-    --background: 54 38% 97%;
-    --foreground: 20 5% 8%;
+    --background: 250 33% 98%;
+    --foreground: 250 14% 10%;
     
-    --primary: 25 45% 12%;
-    --primary-foreground: 60 9% 98%;
+    --primary: 250 95% 25%;
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 43 65% 52%;
-    --secondary-foreground: 24 5% 8%;
+    --secondary: 45 93% 47%;
+    --secondary-foreground: 250 14% 10%;
     
-    --accent: 346 42% 32%;
-    --accent-foreground: 60 9% 98%;
+    --accent: 250 95% 35%;
+    --accent-foreground: 0 0% 100%;
     
-    --border: 20 5% 88%;
-    --input: 20 5% 88%;
-    --ring: 20 5% 88%;
+    --border: 250 14% 88%;
+    --input: 250 14% 88%;
+    --ring: 250 14% 88%;
     
     --radius: 0.5rem;
   }
