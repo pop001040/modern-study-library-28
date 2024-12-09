@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import useSound from 'use-sound';
+import { LucideIcon } from 'lucide-react';
 import hoverSound from '../assets/page-flip.mp3';
 import selectSound from '../assets/book-select.mp3';
 
 interface BookCoverProps {
   title: string;
   description: string;
-  color: string;
+  color?: string;
+  icon: LucideIcon;
   onClick: () => void;
   onSelect: () => void;
 }
@@ -19,7 +21,7 @@ const bookColors = [
   'from-[#D2691E] to-[#DEB887]',
 ];
 
-export const BookCover = ({ title, description, onClick, onSelect }: BookCoverProps) => {
+export const BookCover = ({ title, description, icon: Icon, onClick, onSelect }: BookCoverProps) => {
   const randomColor = bookColors[Math.floor(Math.random() * bookColors.length)];
   const [playHover] = useSound(hoverSound, { volume: 0.5 });
   const [playSelect] = useSound(selectSound, { volume: 0.5 });
@@ -49,36 +51,52 @@ export const BookCover = ({ title, description, onClick, onSelect }: BookCoverPr
         onClick={handleClick}
         initial={{ rotateY: 0, y: 0 }}
         whileHover={{ 
+          rotateY: -20,
           y: -10,
           transition: { duration: 0.3 }
         }}
         onHoverStart={handleHover}
       >
-        <div className="relative w-[80px] h-[120px] book-hover">
-          <motion.div
-            className="absolute inset-0 bg-yellow-300/20 blur-md rounded-sm -z-10"
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          />
+        <div className="relative w-[80px] h-[120px]">
+          {/* ظل الكتاب */}
+          <div className="book-shadow" />
           
-          <div className={`absolute inset-0 bg-gradient-to-l ${randomColor} rounded-sm shadow-2xl border-r-2 border-[#DEB887]`}>
+          {/* غلاف الكتاب */}
+          <div className={`absolute inset-0 bg-gradient-to-l ${randomColor} rounded-sm shadow-2xl border-r-2 border-[#DEB887] book-pages`}>
             <div className="h-full p-2 flex flex-col justify-between">
               <div className="space-y-1">
+                {/* أيقونة نوع الدراسة */}
+                <div className="flex justify-center mb-2">
+                  <Icon className="w-4 h-4 text-[#DEB887]" />
+                </div>
+                
+                {/* زخرفة */}
                 <div className="w-6 h-0.5 bg-[#DEB887] rounded-full mx-auto" />
-                <h3 className="text-[8px] font-bold text-[#DEB887] text-right leading-tight">{title}</h3>
-                <p className="text-[6px] text-[#DEB887]/80 text-right mt-1">{description}</p>
+                
+                {/* عنوان الكتاب */}
+                <h3 className="text-[8px] font-bold text-[#DEB887] text-right leading-tight drop-shadow-sm">
+                  {title}
+                </h3>
+                
+                {/* وصف مختصر */}
+                <p className="text-[6px] text-[#DEB887]/80 text-right mt-1">
+                  {description}
+                </p>
               </div>
             </div>
           </div>
+          
+          {/* جانب الكتاب */}
           <div 
             className="absolute inset-y-0 right-0 w-1 bg-[#DEB887]/20 transform origin-right" 
             style={{ transform: 'rotateY(-20deg) translateZ(-1px)' }} 
           />
+          
+          {/* زر الطلب */}
           <div className="absolute -bottom-8 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <button
               onClick={handleSelect}
-              className="text-[8px] bg-[#8B4513] text-[#DEB887] px-2 py-1 rounded-sm hover:bg-[#A0522D] transition-colors w-full"
+              className="text-[8px] bg-[#8B4513] text-[#DEB887] px-2 py-1 rounded-sm hover:bg-[#A0522D] transition-colors w-full shadow-lg"
             >
               طلب الدراسة
             </button>
