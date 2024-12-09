@@ -31,7 +31,6 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
             transition={{ duration: 0.5 }}
           >
             <div className="relative w-[200px] h-[300px] book-hover">
-              {/* الغلاف الأمامي */}
               <div className="absolute inset-0 bg-gradient-to-l from-primary/90 to-primary rounded-lg shadow-xl border-r-4 border-primary-foreground/20">
                 <div className="h-full p-6 flex flex-col justify-between">
                   <div className="space-y-4">
@@ -40,7 +39,6 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
                   </div>
                 </div>
               </div>
-              {/* ظهر الكتاب */}
               <div className="absolute inset-y-0 right-0 w-4 bg-primary-foreground/10 transform origin-right" 
                    style={{ transform: 'rotateY(-20deg) translateZ(-2px)' }} />
             </div>
@@ -53,18 +51,27 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
             exit={{ rotateY: 90 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="relative w-[300px] h-[400px] bg-white rounded-lg shadow-2xl p-6 space-y-6">
+            <div className="relative w-[300px] h-[400px] bg-white rounded-lg shadow-2xl p-6">
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="space-y-4 text-right"
+                className="space-y-6 text-right"
               >
                 <h2 className="text-2xl font-bold text-primary">{title}</h2>
-                <div className="space-y-2">
-                  <p className="text-lg">رأس المال: <span className="font-bold">{capital.toLocaleString()} جنيه</span></p>
-                  <p className="text-lg">الأرباح المتوقعة: <span className="font-bold">{expectedProfit.toLocaleString()} جنيه</span></p>
-                  <p className="text-lg">سعر الدراسة: <span className="font-bold">{price} جنيه</span></p>
+                <div className="space-y-4">
+                  <div className="p-4 bg-primary/5 rounded-lg">
+                    <p className="text-lg">رأس المال المطلوب</p>
+                    <p className="text-2xl font-bold text-primary">{capital.toLocaleString()} جنيه</p>
+                  </div>
+                  <div className="p-4 bg-secondary/10 rounded-lg">
+                    <p className="text-lg">الأرباح المتوقعة</p>
+                    <p className="text-2xl font-bold text-secondary">{expectedProfit.toLocaleString()} جنيه</p>
+                  </div>
+                  <div className="p-4 bg-accent/10 rounded-lg">
+                    <p className="text-lg">سعر الدراسة</p>
+                    <p className="text-2xl font-bold text-accent">{price} جنيه</p>
+                  </div>
                 </div>
                 <Button 
                   onClick={onSelect}
@@ -80,7 +87,6 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
                   إغلاق
                 </button>
               </motion.div>
-              {/* تأثير تقليب الصفحات */}
               <div className="absolute inset-0 pointer-events-none">
                 {[...Array(3)].map((_, i) => (
                   <motion.div
