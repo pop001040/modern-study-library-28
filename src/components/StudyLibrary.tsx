@@ -23,22 +23,15 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
       className="relative min-h-[500px]"
     >
       {/* خلفية المكتبة الخشبية */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#8B4513] to-[#A0522D] rounded-xl shadow-2xl overflow-hidden">
-        {/* نقوش الخشب */}
-        <div 
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23DEB887' fill-opacity='0.1'%3E%3Cpath d='M0 0h100v100H0z'/%3E%3Cpath d='M10 10h80v80H10z' fill='none' stroke='%23DEB887' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundSize: '100px 100px'
-          }}
-        />
-        
+      <div className="absolute inset-0 bg-[#8B4513] rounded-xl shadow-2xl overflow-hidden">
         {/* رفوف المكتبة */}
         <div className="absolute inset-0 grid grid-rows-5 gap-2 p-4">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="relative">
-              <div className="absolute bottom-0 left-0 right-0 h-6 bg-[#654321] shadow-lg" />
-              <div className="absolute bottom-6 left-0 right-0 h-1 bg-[#8B4513]/50" />
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-[#654321] shadow-xl" style={{
+                backgroundImage: 'linear-gradient(to bottom, #8B4513, #654321)'
+              }} />
+              <div className="absolute bottom-8 left-0 right-0 h-1 bg-[#4A3219]" />
             </div>
           ))}
         </div>
