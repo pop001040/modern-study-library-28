@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import useSound from 'use-sound';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import hoverSound from '../assets/page-flip.mp3';
 import selectSound from '../assets/book-select.mp3';
 
@@ -31,72 +30,51 @@ export const BookCover = ({ title, description, onClick, onSelect }: BookCoverPr
   };
 
   return (
-    <HoverCard>
-      <HoverCardTrigger asChild>
-        <div className="group perspective">
-          <motion.div
-            className="book-container cursor-pointer relative"
-            onClick={handleClick}
-            initial={{ rotateY: 0, y: 0 }}
-            whileHover={{ 
-              rotateY: -20,
-              y: -10,
-              transition: { duration: 0.3 }
-            }}
-            onHoverStart={handleHover}
-          >
-            <div className="relative w-[80px] h-[120px]">
-              {/* ظل الكتاب */}
-              <div className="book-shadow" />
-              
-              {/* غلاف الكتاب */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 rounded-sm shadow-lg border border-blue-300/30 book-pages backdrop-blur-sm">
-                <div className="h-full p-2 flex flex-col justify-between bg-gradient-to-t from-blue-900/20 to-transparent">
-                  <div className="space-y-1">
-                    {/* عنوان الكتاب */}
-                    <h3 className="text-[10px] font-bold text-white text-right leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">
-                      {title}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-              
-              {/* جانب الكتاب */}
-              <div 
-                className="absolute inset-y-0 right-0 w-1 bg-gradient-to-b from-blue-300 to-blue-500 transform origin-right" 
-                style={{ transform: 'rotateY(-20deg) translateZ(-1px)' }} 
-              />
-              
-              {/* زر الطلب */}
-              <div className="absolute -bottom-8 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <button
-                  onClick={handleSelect}
-                  className="text-[8px] bg-gradient-to-r from-blue-600 to-blue-700 text-white px-2 py-1 rounded-sm hover:from-blue-700 hover:to-blue-800 transition-all duration-300 w-full shadow-lg transform hover:scale-105"
-                >
-                  طلب الدراسة
-                </button>
+    <div className="group perspective">
+      <motion.div
+        className="book-container cursor-pointer relative"
+        onClick={handleClick}
+        initial={{ rotateY: 0, y: 0 }}
+        whileHover={{ 
+          rotateY: -20,
+          y: -10,
+          transition: { duration: 0.3 }
+        }}
+        onHoverStart={handleHover}
+      >
+        <div className="relative w-[80px] h-[120px]">
+          {/* ظل الكتاب */}
+          <div className="book-shadow" />
+          
+          {/* غلاف الكتاب */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 rounded-sm shadow-lg border border-blue-300/30 book-pages backdrop-blur-sm">
+            <div className="h-full p-2 flex flex-col justify-between bg-gradient-to-t from-blue-900/20 to-transparent">
+              <div className="space-y-1">
+                {/* عنوان الكتاب */}
+                <h3 className="text-[10px] font-bold text-white text-right leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">
+                  {title}
+                </h3>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </HoverCardTrigger>
-      <HoverCardContent 
-        className="w-64 p-4 bg-white/95 backdrop-blur-sm border border-blue-200 shadow-xl"
-        side="right"
-      >
-        <div className="space-y-2 text-right" dir="rtl">
-          <h4 className="text-sm font-bold text-blue-900">{title}</h4>
-          <p className="text-xs text-gray-600">{description}</p>
-          <div className="pt-2">
+          </div>
+          
+          {/* جانب الكتاب */}
+          <div 
+            className="absolute inset-y-0 right-0 w-1 bg-gradient-to-b from-blue-300 to-blue-500 transform origin-right" 
+            style={{ transform: 'rotateY(-20deg) translateZ(-1px)' }} 
+          />
+          
+          {/* زر الطلب */}
+          <div className="absolute -bottom-8 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <button
               onClick={handleSelect}
-              className="w-full text-xs bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-1.5 rounded-sm hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg transform hover:scale-105"
+              className="text-[8px] bg-gradient-to-r from-blue-600 to-blue-700 text-white px-2 py-1 rounded-sm hover:from-blue-700 hover:to-blue-800 transition-all duration-300 w-full shadow-lg transform hover:scale-105"
             >
               طلب الدراسة
             </button>
           </div>
         </div>
-      </HoverCardContent>
-    </HoverCard>
+      </motion.div>
+    </div>
   );
 };
