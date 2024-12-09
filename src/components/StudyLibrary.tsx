@@ -63,13 +63,12 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
       animate={{ opacity: 1 }}
       className="relative min-h-[600px]"
     >
-      {/* خلفية الرف */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent rounded-xl">
-        <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#8B4513]/10 to-transparent rounded-xl">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/665ba71a-047d-4cc6-aa26-31dfa5e21093.png')] bg-cover bg-center opacity-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-[#8B4513]/20 via-[#8B4513]/30 to-[#8B4513]/20" />
       </div>
       
-      {/* الكتب */}
-      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+      <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2 p-4">
         {studies.map((study) => (
           <StudyBook
             key={study.id}
