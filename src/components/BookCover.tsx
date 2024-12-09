@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import useSound from 'use-sound';
-import hoverSound from '../assets/page-flip.mp3';
-import selectSound from '../assets/book-select.mp3';
+// استيراد الملفات الصوتية بشكل صحيح
+import pageFlipSound from '../assets/page-flip.mp3';
+import bookSelectSound from '../assets/book-select.mp3';
 
 interface BookCoverProps {
   title: string;
@@ -22,33 +23,47 @@ const bookColors = [
 export const BookCover = ({ title, description, onClick, onSelect }: BookCoverProps) => {
   const randomColor = bookColors[Math.floor(Math.random() * bookColors.length)];
   
-  // تكوين الأصوات مع حجم صوت أعلى
-  const [playHover] = useSound(hoverSound, { 
+  // تكوين الأصوات مع إضافة معالجة الأخطاء
+  const [playHover] = useSound(pageFlipSound, { 
     volume: 1.0,
-    onplay: () => console.log('تشغيل صوت التحويم')
+    onplay: () => console.log('تشغيل صوت التحويم'),
+    onplayerror: (id, error) => console.error('خطأ في تشغيل صوت التحويم:', error)
   });
   
-  const [playSelect] = useSound(selectSound, { 
+  const [playSelect] = useSound(bookSelectSound, { 
     volume: 1.0,
-    onplay: () => console.log('تشغيل صوت الاختيار')
+    onplay: () => console.log('تشغيل صوت الاختيار'),
+    onplayerror: (id, error) => console.error('خطأ في تشغيل صوت الاختيار:', error)
   });
 
   const handleClick = () => {
     console.log('تم النقر على الكتاب - تشغيل صوت الاختيار');
-    playSelect();
+    try {
+      playSelect();
+    } catch (error) {
+      console.error('خطأ عند تشغيل صوت الاختيار:', error);
+    }
     onClick();
   };
 
   const handleSelect = (e: React.MouseEvent) => {
     console.log('تم اختيار الكتاب - تشغيل صوت الاختيار');
     e.stopPropagation();
-    playSelect();
+    try {
+      playSelect();
+    } catch (error) {
+      console.error('خطأ عند تشغيل صوت الاختيار:', error);
+    }
     onSelect();
   };
 
   const handleHover = () => {
     console.log('تم التحويم على الكتاب - تشغيل صوت التحويم');
-    playHover();
+    try {
+      playHover();
+    } catch (error) {
+      console.error('خطأ عند تشغيل صوت التحويم:', error);
+    }
   };
 
   return (
