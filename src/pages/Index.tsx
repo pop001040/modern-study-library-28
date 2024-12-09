@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { ClassicCounter } from '@/components/ClassicCounter';
 import { StudyLibrary } from '@/components/StudyLibrary';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
@@ -27,14 +26,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background" dir="rtl">
-      <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-lg py-4">
-        <ClassicCounter 
-          soldStudies={selectedStudies.length} 
-          totalAmount={totalAmount} 
-        />
-      </div>
-
-      <div className="container mx-auto py-8 pt-48">
+      <div className="container mx-auto py-8">
         <h1 className="text-4xl font-bold text-center mb-8 font-['Noto Kufi Arabic'] text-[#8B4513]">
           مكتبة دراسات الجدوى
         </h1>
