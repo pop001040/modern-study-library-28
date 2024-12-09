@@ -27,7 +27,7 @@ const Home = () => {
           <div className="space-y-4">
             <Link to="/studies">
               <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg">
-                استعرض المكتبة
+                ابدأ مشروعك
               </Button>
             </Link>
           </div>
