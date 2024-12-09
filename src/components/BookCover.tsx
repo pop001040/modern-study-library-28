@@ -20,28 +20,37 @@ const bookColors = [
 export const BookCover = ({ title, description, onClick, onSelect }: BookCoverProps) => {
   const randomColor = bookColors[Math.floor(Math.random() * bookColors.length)];
   
-  const [playHover] = useSound('/src/assets/page-flip.mp3', { 
+  const [playHover] = useSound('./src/assets/page-flip.mp3', { 
     volume: 1.0,
-    interrupt: true
+    interrupt: true,
+    onplayerror: (id, err) => {
+      console.error('خطأ في تشغيل صوت التحويم:', err);
+    }
   });
   
-  const [playSelect] = useSound('/src/assets/book-select.mp3', { 
+  const [playSelect] = useSound('./src/assets/book-select.mp3', { 
     volume: 1.0,
-    interrupt: true
+    interrupt: true,
+    onplayerror: (id, err) => {
+      console.error('خطأ في تشغيل صوت الاختيار:', err);
+    }
   });
 
   const handleClick = () => {
+    console.log('محاولة تشغيل صوت الاختيار');
     playSelect();
     onClick();
   };
 
   const handleSelect = (e: React.MouseEvent) => {
     e.stopPropagation();
+    console.log('محاولة تشغيل صوت الاختيار');
     playSelect();
     onSelect();
   };
 
   const handleHover = () => {
+    console.log('محاولة تشغيل صوت التحويم');
     playHover();
   };
 
