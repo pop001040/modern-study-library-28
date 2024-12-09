@@ -21,24 +21,33 @@ const bookColors = [
 
 export const BookCover = ({ title, description, onClick, onSelect }: BookCoverProps) => {
   const randomColor = bookColors[Math.floor(Math.random() * bookColors.length)];
-  const [playHover] = useSound(hoverSound, { volume: 0.5 });
-  const [playSelect] = useSound(selectSound, { volume: 0.5 });
+  
+  // تكوين الأصوات مع حجم صوت أعلى
+  const [playHover] = useSound(hoverSound, { 
+    volume: 1.0,
+    onplay: () => console.log('تشغيل صوت التحويم')
+  });
+  
+  const [playSelect] = useSound(selectSound, { 
+    volume: 1.0,
+    onplay: () => console.log('تشغيل صوت الاختيار')
+  });
 
   const handleClick = () => {
-    console.log('Book clicked - playing select sound');
+    console.log('تم النقر على الكتاب - تشغيل صوت الاختيار');
     playSelect();
     onClick();
   };
 
   const handleSelect = (e: React.MouseEvent) => {
-    console.log('Book selected - playing select sound');
+    console.log('تم اختيار الكتاب - تشغيل صوت الاختيار');
     e.stopPropagation();
     playSelect();
     onSelect();
   };
 
   const handleHover = () => {
-    console.log('Book hovered - playing hover sound');
+    console.log('تم التحويم على الكتاب - تشغيل صوت التحويم');
     playHover();
   };
 
