@@ -30,17 +30,17 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
             exit={{ rotateY: -90 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="relative w-[80px] h-[120px] book-hover">
-              <div className="absolute inset-0 bg-gradient-to-l from-[#8B4513] to-[#A0522D] rounded-sm shadow-xl border-r-2 border-[#DEB887]">
-                <div className="h-full p-2 flex flex-col justify-between">
-                  <div className="space-y-1">
-                    <div className="w-8 h-0.5 bg-[#DEB887] rounded-full mx-auto" />
-                    <h3 className="text-[8px] font-bold text-[#DEB887] text-right leading-tight">{title}</h3>
+            <div className="relative w-[200px] h-[300px] book-hover">
+              <div className="absolute inset-0 bg-gradient-to-l from-primary/90 to-primary rounded-lg shadow-xl border-r-4 border-primary-foreground/20">
+                <div className="h-full p-6 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="w-16 h-1 bg-primary-foreground/20 rounded-full mx-auto" />
+                    <h3 className="text-xl font-bold text-primary-foreground text-right">{title}</h3>
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 w-1 bg-[#DEB887]/20 transform origin-right" 
-                   style={{ transform: 'rotateY(-20deg) translateZ(-1px)' }} />
+              <div className="absolute inset-y-0 right-0 w-4 bg-primary-foreground/10 transform origin-right" 
+                   style={{ transform: 'rotateY(-20deg) translateZ(-2px)' }} />
             </div>
           </motion.div>
         ) : (
@@ -51,38 +51,38 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
             exit={{ rotateY: 90 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="relative w-[200px] h-[250px] bg-[#FFF8DC] rounded-sm shadow-2xl p-4">
+            <div className="relative w-[300px] h-[400px] bg-white rounded-lg shadow-2xl p-6">
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="space-y-4 text-right"
+                className="space-y-6 text-right"
               >
-                <h2 className="text-lg font-bold text-[#8B4513]">{title}</h2>
-                <div className="space-y-3">
-                  <div className="p-2 bg-[#8B4513]/5 rounded-lg">
-                    <p className="text-xs">رأس المال المطلوب</p>
-                    <p className="text-base font-bold text-[#8B4513]">{capital.toLocaleString()} جنيه</p>
+                <h2 className="text-2xl font-bold text-primary">{title}</h2>
+                <div className="space-y-4">
+                  <div className="p-4 bg-primary/5 rounded-lg">
+                    <p className="text-lg">رأس المال المطلوب</p>
+                    <p className="text-2xl font-bold text-primary">{capital.toLocaleString()} جنيه</p>
                   </div>
-                  <div className="p-2 bg-[#DEB887]/20 rounded-lg">
-                    <p className="text-xs">الأرباح المتوقعة</p>
-                    <p className="text-base font-bold text-[#A0522D]">{expectedProfit.toLocaleString()} جنيه</p>
+                  <div className="p-4 bg-secondary/10 rounded-lg">
+                    <p className="text-lg">الأرباح المتوقعة</p>
+                    <p className="text-2xl font-bold text-secondary">{expectedProfit.toLocaleString()} جنيه</p>
                   </div>
-                  <div className="p-2 bg-[#8B4513]/10 rounded-lg">
-                    <p className="text-xs">سعر الدراسة</p>
-                    <p className="text-base font-bold text-[#8B4513]">{price} جنيه</p>
+                  <div className="p-4 bg-accent/10 rounded-lg">
+                    <p className="text-lg">سعر الدراسة</p>
+                    <p className="text-2xl font-bold text-accent">{price} جنيه</p>
                   </div>
                 </div>
                 <Button 
                   onClick={onSelect}
-                  className="w-full bg-[#8B4513] hover:bg-[#A0522D] text-[#FFF8DC] mt-2 group text-xs"
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mt-4 group"
                 >
-                  <ShoppingCart className="ml-2 h-3 w-3 transition-transform group-hover:scale-110" />
+                  <ShoppingCart className="ml-2 h-4 w-4 transition-transform group-hover:scale-110" />
                   طلب الدراسة
                 </Button>
                 <button 
                   onClick={handleClick}
-                  className="mt-2 text-xs text-[#8B4513]/60 hover:text-[#8B4513]"
+                  className="mt-4 text-sm text-primary/60 hover:text-primary"
                 >
                   إغلاق
                 </button>
@@ -91,9 +91,9 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
                 {[...Array(3)].map((_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute inset-0 bg-[#FFF8DC] border border-[#DEB887] rounded-sm"
-                    initial={{ rotateY: 90, x: 10 * i }}
-                    animate={{ rotateY: 0, x: 5 * i }}
+                    className="absolute inset-0 bg-white border rounded-lg"
+                    initial={{ rotateY: 90, x: 20 * i }}
+                    animate={{ rotateY: 0, x: 10 * i }}
                     transition={{ delay: 0.1 * i }}
                     style={{ zIndex: -i }}
                   />
