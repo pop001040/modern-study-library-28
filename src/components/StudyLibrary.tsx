@@ -1,8 +1,8 @@
 import { StudyBook } from './StudyBook';
 import { motion } from 'framer-motion';
-import { Library } from 'lucide-react';
+import { ClassicCounter } from './ClassicCounter';
+import { useState } from 'react';
 
-// إنشاء مصفوفة من الدراسات
 const studies = [
   // المشاريع الزراعية الحيوانية
   "مشروع مزرعة تربية الأبقار لإنتاج الحليب",
@@ -128,12 +128,28 @@ interface StudyLibraryProps {
 }
 
 export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
+  const [selectedStudies, setSelectedStudies] = useState<Array<{ id: number; price: number }>>([]);
+
+  const handleSelectStudy = (study: typeof studies[0]) => {
+    setSelectedStudies(prev => [...prev, { id: study.id, price: study.price }]);
+    onSelectStudy(study);
+  };
+
+  const totalAmount = selectedStudies.reduce((sum, study) => sum + study.price, 0);
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="relative min-h-[800px] perspective"
     >
+      <div className="mb-8">
+        <ClassicCounter 
+          soldStudies={selectedStudies.length} 
+          totalAmount={totalAmount}
+        />
+      </div>
+
       {/* خلفية المكتبة الخشبية */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#8B4513] to-[#654321] rounded-xl shadow-2xl overflow-hidden">
         {/* نمط خشبي */}
@@ -147,13 +163,8 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
         <div className="absolute inset-0 grid grid-rows-5 gap-8 p-8">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="relative">
-              {/* ظل الرف */}
               <div className="absolute bottom-0 left-0 right-0 h-12 bg-[#4A3219] transform skew-x-12 -skew-y-3 shadow-2xl opacity-50" />
-              
-              {/* سطح الرف */}
               <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-b from-[#8B4513] to-[#654321] transform -skew-x-12 shadow-xl" />
-              
-              {/* حافة الرف */}
               <div className="absolute bottom-8 left-0 right-0 h-2 bg-[#4A3219] transform -skew-x-12" />
             </div>
           ))}
@@ -161,7 +172,7 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
       </div>
       
       {/* الكتب */}
-      <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-6 p-8 max-h-[800px] overflow-y-auto">
+      <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 p-8 max-h-[800px] overflow-y-auto">
         {studies.map((study) => (
           <StudyBook
             key={study.id}
@@ -170,7 +181,7 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
             capital={study.capital}
             expectedProfit={study.expectedProfit}
             price={study.price}
-            onSelect={() => onSelectStudy(study)}
+            onSelect={() => handleSelectStudy(study)}
           />
         ))}
       </div>
