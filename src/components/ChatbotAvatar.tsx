@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import { Phone, X, Send, MinusCircle } from 'lucide-react';
 
 interface Message {
@@ -14,7 +13,6 @@ interface Message {
 export const ChatbotAvatar = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
-  const [isWaving, setIsWaving] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -24,6 +22,24 @@ export const ChatbotAvatar = () => {
     }
   ]);
   const [minimized, setMinimized] = useState(false);
+
+  const questions = [
+    "ما هي دراسة الجدوى؟",
+    "هل هذه الدراسة تشمل كل جوانب المشروع؟",
+    "كم من الوقت يستغرق إعداد دراسة الجدوى؟",
+    "ما هو محتوى دراسة الجدوى؟",
+    "ما هي تكلفة بدء المشروع؟",
+    "ما هو العائد المتوقع على الاستثمار؟",
+  ];
+
+  const answers = {
+    "ما هي دراسة الجدوى؟": "دراسة الجدوى هي عملية تحليل شاملة للمشروع المقترح بهدف تقييم إمكانية تنفيذه بنجاح. تتضمن الدراسة تحديد ما إذا كان المشروع يستحق الاستثمار ويجب تنفيذه بناءً على تقييم للفرص والمخاطر المالية، السوقية، التقنية، والقانونية.",
+    "هل هذه الدراسة تشمل كل جوانب المشروع؟": "نعم، دراسة الجدوى تشمل جميع جوانب المشروع الضرورية لضمان نجاحه. يتم تحليل الجوانب المالية، السوقية، التقنية، والتشغيلية، وكذلك المخاطر المحتملة التي قد تؤثر على تنفيذ المشروع.",
+    "كم من الوقت يستغرق إعداد دراسة الجدوى؟": "مدة إعداد دراسة الجدوى تعتمد على حجم وتعقيد المشروع. عادةً ما يستغرق إعداد دراسة جدوى شاملة بين 2 إلى 4 أسابيع. قد تختلف المدة وفقًا لمتطلبات العميل وحجم البيانات المتاحة.",
+    "ما هو محتوى دراسة الجدوى؟": "دراسة الجدوى تتضمن: التكاليف الأولية، تحليل السوق، التوقعات المالية، وتحليل المخاطر المحتملة.",
+    "ما هي تكلفة بدء المشروع؟": "تكلفة بدء المشروع تشمل: شراء المعدات والآلات، التراخيص والتصاريح، تكاليف التوظيف والتدريب، تأثيث وتجهيز المكان.",
+    "ما هو العائد المتوقع على الاستثمار؟": "العائد على الاستثمار (ROI) هو مقياس يستخدم لتحديد الربح مقارنة بالمبلغ المستثمر. يُحسب بقسمة الإيرادات الصافية على الاستثمار الإجمالي × 100.",
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,6 +52,24 @@ export const ChatbotAvatar = () => {
   const handleClick = () => {
     setShowChat(true);
     setMinimized(false);
+  };
+
+  const handleQuestionClick = (question: string) => {
+    // Add the user's question to messages
+    setMessages(prev => [...prev, {
+      id: prev.length + 1,
+      text: question,
+      sender: 'user'
+    }]);
+
+    // Add the bot's answer after a short delay
+    setTimeout(() => {
+      setMessages(prev => [...prev, {
+        id: prev.length + 1,
+        text: answers[question as keyof typeof answers],
+        sender: 'bot'
+      }]);
+    }, 500);
   };
 
   const handleStartProject = () => {
@@ -126,35 +160,20 @@ export const ChatbotAvatar = () => {
                   ))}
                 </div>
 
-                {/* FAQ Section */}
+                {/* Questions Buttons */}
                 <div className="p-4 border-t">
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>ما هي دراسة الجدوى؟</AccordionTrigger>
-                      <AccordionContent>
-                        دراسة الجدوى هي عملية تحليل شاملة للمشروع المقترح بهدف تقييم إمكانية تنفيذه بنجاح. تتضمن الدراسة تحديد ما إذا كان المشروع يستحق الاستثمار ويجب تنفيذه بناءً على تقييم للفرص والمخاطر المالية، السوقية، التقنية، والقانونية.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="item-2">
-                      <AccordionTrigger>كم من الوقت يستغرق إعداد دراسة الجدوى؟</AccordionTrigger>
-                      <AccordionContent>
-                        مدة إعداد دراسة الجدوى تعتمد على حجم وتعقيد المشروع. عادةً ما يستغرق إعداد دراسة جدوى شاملة بين 2 إلى 4 أسابيع. قد تختلف المدة وفقًا لمتطلبات العميل وحجم البيانات المتاحة.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="item-3">
-                      <AccordionTrigger>ما هي تكلفة بدء المشروع؟</AccordionTrigger>
-                      <AccordionContent>
-                        <ul className="list-disc pr-4 space-y-2">
-                          <li>شراء المعدات والآلات</li>
-                          <li>التراخيص والتصاريح</li>
-                          <li>تكاليف التوظيف والتدريب</li>
-                          <li>تأثيث وتجهيز المكان</li>
-                        </ul>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
+                  <div className="grid grid-cols-1 gap-2">
+                    {questions.map((question) => (
+                      <Button
+                        key={question}
+                        variant="outline"
+                        className="text-right justify-start hover:bg-green-50"
+                        onClick={() => handleQuestionClick(question)}
+                      >
+                        {question}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Actions */}
