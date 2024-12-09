@@ -1,127 +1,26 @@
 import { StudyBook } from './StudyBook';
 import { motion } from 'framer-motion';
-import { 
-  Factory, Store, Building, User, BarChart, 
-  Leaf, Wheat, Bird, Dog, Fish, 
-  Package, Wrench, Recycle, Computer, ShoppingCart,
-  Globe, BookOpen, Phone, Truck
-} from 'lucide-react';
+import { Factory, Store, Building, User, BarChart } from 'lucide-react';
 
-// تصنيف الدراسات حسب النوع
-const studies = [
-  // المشاريع الزراعية والحيوانية
-  {
-    id: 1,
-    title: "مشروع مزرعة تربية الأبقار",
-    description: "دراسة جدوى متكاملة لمشروع إنتاج الحليب",
-    capital: 500000,
-    expectedProfit: 200000,
-    price: 150,
-    type: { icon: Bird, name: 'حيواني' }
-  },
-  {
-    id: 2,
-    title: "مشروع تسمين العجول",
-    description: "دراسة جدوى لمشروع إنتاج اللحوم",
-    capital: 450000,
-    expectedProfit: 180000,
-    price: 150,
-    type: { icon: Bird, name: 'حيواني' }
-  },
-  {
-    id: 3,
-    title: "مزرعة تربية الأغنام والماعز",
-    description: "دراسة جدوى لإنتاج اللحوم والصوف",
-    capital: 300000,
-    expectedProfit: 120000,
-    price: 150,
-    type: { icon: Dog, name: 'حيواني' }
-  },
-  {
-    id: 4,
-    title: "مزرعة الأسماك",
-    description: "دراسة جدوى للاستزراع السمكي",
-    capital: 250000,
-    expectedProfit: 100000,
-    price: 150,
-    type: { icon: Fish, name: 'حيواني' }
-  },
-  // المشاريع الصناعية
-  {
-    id: 5,
-    title: "مصنع تعبئة وتغليف",
-    description: "دراسة جدوى لمصنع تعبئة المنتجات الغذائية",
-    capital: 800000,
-    expectedProfit: 300000,
-    price: 150,
-    type: { icon: Package, name: 'صناعي' }
-  },
-  {
-    id: 6,
-    title: "مصنع المنظفات",
-    description: "دراسة جدوى لإنتاج الصابون والمنظفات",
-    capital: 600000,
-    expectedProfit: 250000,
-    price: 150,
-    type: { icon: Factory, name: 'صناعي' }
-  },
-  {
-    id: 7,
-    title: "ورشة الأثاث",
-    description: "دراسة جدوى لتصنيع الأثاث المنزلي",
-    capital: 400000,
-    expectedProfit: 160000,
-    price: 150,
-    type: { icon: Wrench, name: 'صناعي' }
-  },
-  {
-    id: 8,
-    title: "مكتب خدمات الترجمة",
-    description: "دراسة جدوى لمكتب ترجمة معتمد",
-    capital: 50000,
-    expectedProfit: 120000,
-    price: 150,
-    type: { icon: BookOpen, name: 'خدمي' }
-  },
-  {
-    id: 9,
-    title: "مركز خدمات الحاسوب",
-    description: "دراسة جدوى لمركز خدمات تقنية",
-    capital: 80000,
-    expectedProfit: 150000,
-    price: 150,
-    type: { icon: Computer, name: 'خدمي' }
-  },
-  // المشاريع التجارية
-  {
-    id: 10,
-    title: "متجر إلكتروني للملابس",
-    description: "دراسة جدوى لمتجر أزياء إلكتروني",
-    capital: 100000,
-    expectedProfit: 200000,
-    price: 150,
-    type: { icon: ShoppingCart, name: 'تجاري' }
-  },
-  // المشاريع الزراعية
-  {
-    id: 11,
-    title: "مزرعة الخضروات العضوية",
-    description: "دراسة جدوى لزراعة الخضروات",
-    capital: 200000,
-    expectedProfit: 80000,
-    price: 150,
-    type: { icon: Leaf, name: 'زراعي' }
-  },
-  {
-    id: 12,
-    title: "مزرعة القمح والحبوب",
-    description: "دراسة جدوى لزراعة الحبوب",
-    capital: 350000,
-    expectedProfit: 140000,
-    price: 150,
-    type: { icon: Wheat, name: 'زراعي' }
-  }
+// تحديد أنواع الدراسات وأيقوناتها
+const studyTypes = [
+  { icon: Factory, name: 'صناعي' },
+  { icon: Store, name: 'تجاري' },
+  { icon: Building, name: 'عقاري' },
+  { icon: User, name: 'خدمي' },
+  { icon: BarChart, name: 'مالي' }
 ];
+
+// إنشاء مصفوفة من 100 دراسة
+const studies = Array.from({ length: 100 }, (_, index) => ({
+  id: index + 1,
+  title: `دراسة جدوى ${index + 1}`,
+  description: `وصف تفصيلي لدراسة الجدوى رقم ${index + 1}`,
+  capital: Math.floor(Math.random() * 900000) + 100000,
+  expectedProfit: Math.floor(Math.random() * 400000) + 100000,
+  price: 150,
+  type: studyTypes[Math.floor(Math.random() * studyTypes.length)]
+}));
 
 interface StudyLibraryProps {
   onSelectStudy: (study: typeof studies[0]) => void;
