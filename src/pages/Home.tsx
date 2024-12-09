@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { ChatbotAvatar } from "@/components/ChatbotAvatar";
 
 const Home = () => {
   return (
@@ -32,6 +33,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      
+      <ChatbotAvatar />
     </div>
   );
 };
