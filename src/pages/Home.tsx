@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white" dir="rtl">
-      <div className="container mx-auto py-16 px-4">
+      <div className="container mx-auto py-24 px-4">
         {/* Logo */}
         <div className="absolute top-4 right-4">
           <img 
@@ -14,7 +14,7 @@ const Home = () => {
           />
         </div>
 
-        <div className="text-center space-y-8">
+        <div className="text-center space-y-8 mt-8">
           <h1 className="text-4xl font-bold text-green-600 mb-4">
             مرحبًا بك في "Green Light"
           </h1>
