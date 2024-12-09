@@ -143,7 +143,7 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
       animate={{ opacity: 1 }}
       className="relative min-h-[800px] bg-white"
     >
-      <div className="mb-8">
+      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm py-4 shadow-lg mb-8">
         <ClassicCounter 
           soldStudies={selectedStudies.length} 
           totalAmount={totalAmount}
@@ -151,7 +151,7 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
       </div>
       
       {/* الكتب */}
-      <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 p-8 max-h-[800px] overflow-y-auto">
+      <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 p-8">
         {studies.map((study) => (
           <StudyBook
             key={study.id}
