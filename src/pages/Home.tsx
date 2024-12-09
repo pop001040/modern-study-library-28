@@ -7,11 +7,11 @@ const Home = () => {
       <div className="container mx-auto py-16 px-4">
         <div className="text-center space-y-8">
           <h1 className="text-4xl font-bold text-blue-900 mb-4">
-            مرحباً بك في مكتبة دراسات الجدوى
+            مرحبًا بك في "Green Light"
           </h1>
           
           <p className="text-xl text-blue-700 mb-8">
-            اكتشف مجموعة واسعة من دراسات الجدوى لمختلف المشاريع
+            اكتشف مجموعة كبيرة من دراسات الجدوى لمختلف المشاريع بطريقة سهلة ومبسطة، وكمان تقدر تسأل الشات بوت بتاعنا لو محتاج مساعدة!
           </p>
           
           <div className="space-y-4">
