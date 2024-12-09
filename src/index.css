@@ -85,20 +85,20 @@
   transform-style: preserve-3d;
   transform-origin: left center;
   transition: transform 0.3s ease-out;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
 }
 
 .book-container:hover {
   transform: translateY(-10px) translateZ(20px);
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
 }
 
 .book-pages {
   transform-style: preserve-3d;
   transform-origin: left center;
   box-shadow: 
-    2px 0 5px rgba(0, 0, 0, 0.1),
-    0 4px 8px rgba(0, 0, 0, 0.1);
+    2px 0 5px rgba(0, 0, 0, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .book-shadow {
@@ -107,7 +107,7 @@
   left: 5%;
   right: 5%;
   height: 20px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   filter: blur(10px);
   transform-origin: center;
   transition: all 0.3s ease-out;
@@ -116,6 +116,6 @@
 
 .book-container:hover .book-shadow {
   transform: scaleX(0.95) translateY(10px);
-  opacity: 0.4;
+  opacity: 0.5;
   filter: blur(12px);
 }
