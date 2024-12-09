@@ -1,5 +1,6 @@
 import { StudyBook } from './StudyBook';
 import { motion } from 'framer-motion';
+import { Library } from 'lucide-react';
 
 // إنشاء مصفوفة من الدراسات
 const studies = [
