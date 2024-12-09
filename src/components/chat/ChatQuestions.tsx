@@ -12,7 +12,7 @@ export const ChatQuestions = ({ questions, onQuestionClick }: ChatQuestionsProps
         <Button
           key={question}
           variant="outline"
-          className="text-right justify-start hover:bg-green-50"
+          className="text-right justify-start hover:bg-green-50 text-sm"
           onClick={() => onQuestionClick(question)}
         >
           {question}
