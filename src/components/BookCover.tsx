@@ -24,23 +24,37 @@ export const BookCover = ({ title, description, onClick, onSelect }: BookCoverPr
   const [playHover] = useSound(hoverSound, { volume: 0.5 });
   const [playSelect] = useSound(selectSound, { volume: 0.5 });
 
+  const handleClick = () => {
+    console.log('Book clicked - playing select sound');
+    playSelect();
+    onClick();
+  };
+
+  const handleSelect = (e: React.MouseEvent) => {
+    console.log('Book selected - playing select sound');
+    e.stopPropagation();
+    playSelect();
+    onSelect();
+  };
+
+  const handleHover = () => {
+    console.log('Book hovered - playing hover sound');
+    playHover();
+  };
+
   return (
     <div className="group perspective">
       <motion.div
         className="book-container cursor-pointer relative"
-        onClick={() => {
-          playSelect();
-          onClick();
-        }}
+        onClick={handleClick}
         initial={{ rotateY: 0, y: 0 }}
         whileHover={{ 
           y: -10,
           transition: { duration: 0.3 }
         }}
-        onHoverStart={() => playHover()}
+        onHoverStart={handleHover}
       >
         <div className="relative w-[80px] h-[120px] book-hover">
-          {/* إضافة تأثير الإضاءة خلف الكتاب */}
           <motion.div
             className="absolute inset-0 bg-yellow-300/20 blur-md rounded-sm -z-10"
             initial={{ opacity: 0 }}
@@ -63,11 +77,7 @@ export const BookCover = ({ title, description, onClick, onSelect }: BookCoverPr
           />
           <div className="absolute -bottom-8 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                playSelect();
-                onSelect();
-              }}
+              onClick={handleSelect}
               className="text-[8px] bg-[#8B4513] text-[#DEB887] px-2 py-1 rounded-sm hover:bg-[#A0522D] transition-colors w-full"
             >
               طلب الدراسة
