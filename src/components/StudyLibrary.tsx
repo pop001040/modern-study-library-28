@@ -63,32 +63,12 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
       animate={{ opacity: 1 }}
       className="relative min-h-[600px]"
     >
-      {/* خلفية المكتبة الخشبية */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#8B4513] to-[#A0522D] rounded-xl shadow-2xl overflow-hidden">
-        {/* نقوش الخشب */}
-        <div className="absolute inset-0 opacity-10">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-full h-4 bg-[#DEB887]/10"
-              style={{ top: `${i * 30}px`, transform: 'rotate(0deg)' }}
-            />
-          ))}
-        </div>
-        
-        {/* رفوف المكتبة */}
-        <div className="absolute inset-0 grid grid-rows-4 gap-4 p-4">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="relative">
-              <div className="absolute bottom-0 left-0 right-0 h-4 bg-[#654321] shadow-md" />
-              <div className="absolute bottom-4 left-0 right-0 h-1 bg-[#8B4513]/50" />
-            </div>
-          ))}
-        </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#8B4513]/10 to-transparent rounded-xl">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/665ba71a-047d-4cc6-aa26-31dfa5e21093.png')] bg-cover bg-center opacity-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-[#8B4513]/20 via-[#8B4513]/30 to-[#8B4513]/20" />
       </div>
       
-      {/* الكتب */}
-      <div className="relative grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2 p-4">
+      <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2 p-4">
         {studies.map((study) => (
           <StudyBook
             key={study.id}

@@ -45,10 +45,10 @@
 
 .book-container {
   transform-style: preserve-3d;
-  transform-origin: left center;
+  transform-origin: right center;
 }
 
 .book-pages {
   transform-style: preserve-3d;
-  transform-origin: left center;
+  transform-origin: right center;
 }
