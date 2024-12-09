@@ -75,14 +75,17 @@ export const ChatbotAvatar = () => {
             transition={{ delay: 0.5 }}
           >
             <p className="mb-3">مرحباً! هل ترغب في استعراض دراسات الجدوى المتاحة؟</p>
-            <Button 
-              onClick={handleClick}
-              className="w-full bg-green-500 hover:bg-green-600 text-white"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              نعم، أرغب في ذلك
-            </Button>
+              <Button 
+                onClick={handleClick}
+                className="w-full bg-green-500 hover:bg-green-600 text-white"
+              >
+                نعم، أرغب في ذلك
+              </Button>
+            </motion.div>
             <div className="absolute bottom-0 right-4 w-4 h-4 bg-white transform rotate-45 translate-y-2" />
           </motion.div>
         </div>
