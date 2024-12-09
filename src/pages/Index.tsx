@@ -6,9 +6,7 @@ import { toast } from '@/components/ui/use-toast';
 
 const Index = () => {
   const [selectedStudies, setSelectedStudies] = useState<Array<{ id: number; price: number }>>([]);
-  const [soldStudies] = useState(1234); // يمكن تحديثه من API
-  const [totalAmount] = useState(185100); // يمكن تحديثه من API
-
+  
   const handleSelectStudy = (study: { id: number; price: number }) => {
     setSelectedStudies((prev) => [...prev, study]);
     toast({
@@ -25,23 +23,27 @@ const Index = () => {
     window.open(`https://wa.me/+201234567890?text=${message}`, '_blank');
   };
 
+  const totalAmount = selectedStudies.reduce((sum, study) => sum + study.price, 0);
+
   return (
     <div className="min-h-screen bg-background" dir="rtl">
-      <div className="container mx-auto py-8">
-        <h1 className="text-4xl font-bold text-center mb-8">مكتبة دراسات الجدوى</h1>
-        
-        <div className="mb-8">
-          <ClassicCounter 
-            soldStudies={soldStudies} 
-            totalAmount={totalAmount} 
-          />
-        </div>
+      <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-lg py-4">
+        <ClassicCounter 
+          soldStudies={selectedStudies.length} 
+          totalAmount={totalAmount} 
+        />
+      </div>
 
+      <div className="container mx-auto py-8 pt-48">
+        <h1 className="text-4xl font-bold text-center mb-8 font-['Noto Kufi Arabic'] text-[#8B4513]">
+          مكتبة دراسات الجدوى
+        </h1>
+        
         {selectedStudies.length > 0 && (
           <div className="text-center mb-8">
             <Button
               onClick={handleCheckout}
-              className="bg-accent hover:bg-accent/90 text-accent-foreground"
+              className="bg-[#8B4513] hover:bg-[#A0522D] text-[#DEB887]"
             >
               الدفع ({selectedStudies.length} دراسات)
             </Button>
