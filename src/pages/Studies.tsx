@@ -22,13 +22,11 @@ const Index = () => {
     window.open(`https://wa.me/+201234567890?text=${message}`, '_blank');
   };
 
-  const totalAmount = selectedStudies.reduce((sum, study) => sum + study.price, 0);
-
   return (
-    <div className="min-h-screen bg-background" dir="rtl">
+    <div className="min-h-screen bg-white" dir="rtl">
       <div className="container mx-auto py-8">
         <h1 className="text-4xl font-bold text-center mb-8 font-['Noto Kufi Arabic'] text-[#8B4513]">
-          مكتبة دراسات الجدوى
+          دراسات الجدوى
         </h1>
         
         {selectedStudies.length > 0 && (
