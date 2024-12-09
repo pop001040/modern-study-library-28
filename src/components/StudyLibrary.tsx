@@ -2,8 +2,8 @@ import { StudyBook } from './StudyBook';
 import { motion } from 'framer-motion';
 import { 
   Factory, Store, Building, User, BarChart, 
-  Leaf, Wheat, Cow, Sheep, Fish, 
-  Package, Tools, Recycle, Computer, ShoppingCart,
+  Leaf, Wheat, Bird, Dog, Fish, 
+  Package, Wrench, Recycle, Computer, ShoppingCart,
   Globe, BookOpen, Phone, Truck
 } from 'lucide-react';
 
@@ -17,7 +17,7 @@ const studies = [
     capital: 500000,
     expectedProfit: 200000,
     price: 150,
-    type: { icon: Cow, name: 'حيواني' }
+    type: { icon: Bird, name: 'حيواني' }
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const studies = [
     capital: 450000,
     expectedProfit: 180000,
     price: 150,
-    type: { icon: Cow, name: 'حيواني' }
+    type: { icon: Bird, name: 'حيواني' }
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const studies = [
     capital: 300000,
     expectedProfit: 120000,
     price: 150,
-    type: { icon: Sheep, name: 'حيواني' }
+    type: { icon: Dog, name: 'حيواني' }
   },
   {
     id: 4,
@@ -72,9 +72,8 @@ const studies = [
     capital: 400000,
     expectedProfit: 160000,
     price: 150,
-    type: { icon: Tools, name: 'صناعي' }
+    type: { icon: Wrench, name: 'صناعي' }
   },
-  // المشاريع الخدمية
   {
     id: 8,
     title: "مكتب خدمات الترجمة",
