@@ -3,13 +3,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
-import { Phone } from 'lucide-react';
+import { Phone, X, Send, MinusCircle } from 'lucide-react';
+
+interface Message {
+  id: number;
+  text: string;
+  sender: 'bot' | 'user';
+}
 
 export const ChatbotAvatar = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [isWaving, setIsWaving] = useState(false);
-  const [showFAQ, setShowFAQ] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 1,
+      text: "مرحباً! كيف يمكنني مساعدتك اليوم؟",
+      sender: 'bot'
+    }
+  ]);
+  const [minimized, setMinimized] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,19 +34,23 @@ export const ChatbotAvatar = () => {
   }, []);
 
   const handleClick = () => {
-    setIsWaving(true);
+    setShowChat(true);
+    setMinimized(false);
+  };
+
+  const handleStartProject = () => {
+    setMessages(prev => [...prev, {
+      id: prev.length + 1,
+      text: "رائع! سأساعدك في بدء مشروعك.",
+      sender: 'bot'
+    }]);
     setTimeout(() => {
       navigate('/studies');
-      window.scrollTo({
-        top: document.getElementById('studies-section')?.offsetTop || 0,
-        behavior: 'smooth'
-      });
     }, 1000);
   };
 
-  const handleHover = () => {
-    setIsWaving(true);
-    setTimeout(() => setIsWaving(false), 1000);
+  const handleMinimize = () => {
+    setMinimized(!minimized);
   };
 
   if (!isVisible) return null;
@@ -40,136 +58,124 @@ export const ChatbotAvatar = () => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed bottom-8 right-8 cursor-pointer z-50"
+        className="fixed bottom-8 right-8 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        onHoverStart={handleHover}
       >
-        <div className="relative">
-          <motion.img
-            src="/lovable-uploads/82199cc1-f625-4721-8601-ee8757c421ad.png"
-            alt="مساعد Green Light"
-            className="w-24 h-24 rounded-full object-cover border-4 border-green-500 shadow-lg"
-            animate={isWaving ? {
-              rotate: [0, -10, 10, -10, 10, 0],
-              transition: {
-                duration: 1,
-                ease: "easeInOut"
-              }
-            } : {
-              y: [0, -10, 0],
-              transition: {
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }
-            }}
-            onClick={() => setShowFAQ(!showFAQ)}
-          />
-          
-          {showFAQ ? (
-            <motion.div
-              className="absolute -top-[32rem] right-0 bg-white p-4 rounded-lg shadow-md text-sm max-w-[400px] text-right max-h-[500px] overflow-y-auto"
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <h3 className="text-lg font-bold mb-4 text-green-600">الأسئلة الشائعة حول دراسة الجدوى</h3>
-              
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>ما هي دراسة الجدوى؟</AccordionTrigger>
-                  <AccordionContent>
-                    دراسة الجدوى هي عملية تحليل شاملة للمشروع المقترح بهدف تقييم إمكانية تنفيذه بنجاح. تتضمن الدراسة تحديد ما إذا كان المشروع يستحق الاستثمار ويجب تنفيذه بناءً على تقييم للفرص والمخاطر المالية، السوقية، التقنية، والقانونية.
-                  </AccordionContent>
-                </AccordionItem>
+        {!showChat ? (
+          <div className="relative cursor-pointer" onClick={handleClick}>
+            <motion.img
+              src="/lovable-uploads/82199cc1-f625-4721-8601-ee8757c421ad.png"
+              alt="مساعد Green Light"
+              className="w-24 h-24 rounded-full object-cover border-4 border-green-500 shadow-lg"
+              animate={{
+                y: [0, -10, 0],
+                transition: {
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+            />
+          </div>
+        ) : (
+          <motion.div
+            className={`bg-white rounded-lg shadow-xl ${minimized ? 'w-64 h-16' : 'w-96 h-[600px]'}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {/* Chat Header */}
+            <div className="flex items-center justify-between p-4 border-b bg-green-500 text-white rounded-t-lg">
+              <div className="flex items-center gap-3">
+                <img
+                  src="/lovable-uploads/82199cc1-f625-4721-8601-ee8757c421ad.png"
+                  alt="مساعد Green Light"
+                  className="w-10 h-10 rounded-full object-cover border-2 border-white"
+                />
+                <span className="font-bold">مساعد Green Light</span>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={handleMinimize}>
+                  <MinusCircle className="w-6 h-6" />
+                </button>
+                <button onClick={() => setShowChat(false)}>
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
 
-                <AccordionItem value="item-2">
-                  <AccordionTrigger>هل هذه الدراسة تشمل كل جوانب المشروع؟</AccordionTrigger>
-                  <AccordionContent>
-                    نعم، دراسة الجدوى تشمل جميع جوانب المشروع الضرورية لضمان نجاحه. يتم تحليل الجوانب المالية، السوقية، التقنية، والتشغيلية، وكذلك المخاطر المحتملة التي قد تؤثر على تنفيذ المشروع.
-                  </AccordionContent>
-                </AccordionItem>
+            {!minimized && (
+              <>
+                {/* Chat Messages */}
+                <div className="p-4 h-[400px] overflow-y-auto space-y-4" dir="rtl">
+                  {messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex ${message.sender === 'bot' ? 'justify-start' : 'justify-end'}`}
+                    >
+                      <div
+                        className={`max-w-[80%] p-3 rounded-lg ${
+                          message.sender === 'bot'
+                            ? 'bg-gray-100'
+                            : 'bg-green-500 text-white'
+                        }`}
+                      >
+                        {message.text}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
-                <AccordionItem value="item-3">
-                  <AccordionTrigger>كم من الوقت يستغرق إعداد دراسة الجدوى؟</AccordionTrigger>
-                  <AccordionContent>
-                    مدة إعداد دراسة الجدوى تعتمد على حجم وتعقيد المشروع. عادةً ما يستغرق إعداد دراسة جدوى شاملة بين 2 إلى 4 أسابيع. قد تختلف المدة وفقًا لمتطلبات العميل وحجم البيانات المتاحة.
-                  </AccordionContent>
-                </AccordionItem>
+                {/* FAQ Section */}
+                <div className="p-4 border-t">
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>ما هي دراسة الجدوى؟</AccordionTrigger>
+                      <AccordionContent>
+                        دراسة الجدوى هي عملية تحليل شاملة للمشروع المقترح بهدف تقييم إمكانية تنفيذه بنجاح. تتضمن الدراسة تحديد ما إذا كان المشروع يستحق الاستثمار ويجب تنفيذه بناءً على تقييم للفرص والمخاطر المالية، السوقية، التقنية، والقانونية.
+                      </AccordionContent>
+                    </AccordionItem>
 
-                <AccordionItem value="item-4">
-                  <AccordionTrigger>ما هو محتوى دراسة الجدوى؟</AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="list-disc pr-4 space-y-2">
-                      <li>التكاليف الأولية: تقييم التكاليف المتعلقة بتأسيس المشروع</li>
-                      <li>تحليل السوق: دراسة احتياجات السوق، المنافسة، والجمهور المستهدف</li>
-                      <li>التوقعات المالية: حساب الإيرادات المتوقعة والتكاليف التشغيلية</li>
-                      <li>المخاطر: تحليل التحديات التي قد يواجهها المشروع وكيفية التعامل معها</li>
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
+                    <AccordionItem value="item-2">
+                      <AccordionTrigger>كم من الوقت يستغرق إعداد دراسة الجدوى؟</AccordionTrigger>
+                      <AccordionContent>
+                        مدة إعداد دراسة الجدوى تعتمد على حجم وتعقيد المشروع. عادةً ما يستغرق إعداد دراسة جدوى شاملة بين 2 إلى 4 أسابيع. قد تختلف المدة وفقًا لمتطلبات العميل وحجم البيانات المتاحة.
+                      </AccordionContent>
+                    </AccordionItem>
 
-                <AccordionItem value="item-5">
-                  <AccordionTrigger>ما هي تكلفة بدء المشروع؟</AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="list-disc pr-4 space-y-2">
-                      <li>شراء المعدات والآلات</li>
-                      <li>التراخيص والتصاريح</li>
-                      <li>تكاليف التوظيف والتدريب</li>
-                      <li>تأثيث وتجهيز المكان</li>
-                      <li>أي تكاليف أخرى متعلقة بتأسيس المشروع</li>
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                    <AccordionItem value="item-3">
+                      <AccordionTrigger>ما هي تكلفة بدء المشروع؟</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="list-disc pr-4 space-y-2">
+                          <li>شراء المعدات والآلات</li>
+                          <li>التراخيص والتصاريح</li>
+                          <li>تكاليف التوظيف والتدريب</li>
+                          <li>تأثيث وتجهيز المكان</li>
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
 
-              <div className="mt-4 space-y-4">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+                {/* Actions */}
+                <div className="p-4 border-t space-y-4">
                   <Button 
-                    onClick={handleClick}
+                    onClick={handleStartProject}
                     className="w-full bg-green-500 hover:bg-green-600 text-white"
                   >
                     ابدأ مشروعك
                   </Button>
-                </motion.div>
 
-                <div className="flex items-center justify-center gap-2 text-green-600">
-                  <span>للتواصل معنا:</span>
-                  <Phone className="h-4 w-4" />
-                  <a href="tel:01030435987" className="hover:underline">01030435987</a>
+                  <div className="flex items-center justify-center gap-2 text-green-600">
+                    <span>للتواصل معنا:</span>
+                    <Phone className="h-4 w-4" />
+                    <a href="tel:01030435987" className="hover:underline">01030435987</a>
+                  </div>
                 </div>
-              </div>
-
-              <div className="absolute bottom-0 right-4 w-4 h-4 bg-white transform rotate-45 translate-y-2" />
-            </motion.div>
-          ) : (
-            <motion.div
-              className="absolute -top-32 right-0 bg-white p-4 rounded-lg shadow-md text-sm max-w-[250px] text-right"
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <p className="mb-3">مرحباً! هل ترغب في استعراض دراسات الجدوى المتاحة؟</p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  onClick={handleClick}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white"
-                >
-                  ابدأ مشروعك
-                </Button>
-              </motion.div>
-              <div className="absolute bottom-0 right-4 w-4 h-4 bg-white transform rotate-45 translate-y-2" />
-            </motion.div>
-          )}
-        </div>
+              </>
+            )}
+          </motion.div>
+        )}
       </motion.div>
     </AnimatePresence>
   );
