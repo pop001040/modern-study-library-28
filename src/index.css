@@ -49,9 +49,32 @@
 .book-container {
   transform-style: preserve-3d;
   transform-origin: left center;
+  transition: transform 0.3s ease-out;
+}
+
+.book-container:hover {
+  transform: translateY(-10px) translateZ(20px);
 }
 
 .book-pages {
   transform-style: preserve-3d;
   transform-origin: left center;
+}
+
+/* إضافة تأثير الظل للكتب */
+.book-shadow {
+  position: absolute;
+  bottom: -10px;
+  left: 5%;
+  right: 5%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  filter: blur(10px);
+  transform-origin: center;
+  transition: all 0.3s ease-out;
+}
+
+.book-container:hover .book-shadow {
+  transform: scaleX(0.95) translateY(10px);
+  opacity: 0.4;
 }

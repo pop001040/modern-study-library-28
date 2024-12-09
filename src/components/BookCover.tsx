@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion';
+import useSound from 'use-sound';
+import hoverSound from '../assets/page-flip.mp3';
+import selectSound from '../assets/book-select.mp3';
 
 interface BookCoverProps {
   title: string;
@@ -18,19 +21,33 @@ const bookColors = [
 
 export const BookCover = ({ title, description, onClick, onSelect }: BookCoverProps) => {
   const randomColor = bookColors[Math.floor(Math.random() * bookColors.length)];
+  const [playHover] = useSound(hoverSound, { volume: 0.5 });
+  const [playSelect] = useSound(selectSound, { volume: 0.5 });
 
   return (
     <div className="group perspective">
       <motion.div
         className="book-container cursor-pointer relative"
-        onClick={onClick}
-        initial={{ rotateY: 0 }}
-        animate={{ rotateY: 0 }}
-        exit={{ rotateY: -90 }}
-        transition={{ duration: 0.5 }}
-        whileHover={{ scale: 1.05, translateY: -5 }}
+        onClick={() => {
+          playSelect();
+          onClick();
+        }}
+        initial={{ rotateY: 0, y: 0 }}
+        whileHover={{ 
+          y: -10,
+          transition: { duration: 0.3 }
+        }}
+        onHoverStart={() => playHover()}
       >
-        <div className="relative w-[80px] h-[120px] book-hover transform transition-all duration-300 group-hover:translate-y-[-5px]">
+        <div className="relative w-[80px] h-[120px] book-hover">
+          {/* إضافة تأثير الإضاءة خلف الكتاب */}
+          <motion.div
+            className="absolute inset-0 bg-yellow-300/20 blur-md rounded-sm -z-10"
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          />
+          
           <div className={`absolute inset-0 bg-gradient-to-l ${randomColor} rounded-sm shadow-2xl border-r-2 border-[#DEB887]`}>
             <div className="h-full p-2 flex flex-col justify-between">
               <div className="space-y-1">
@@ -48,6 +65,7 @@ export const BookCover = ({ title, description, onClick, onSelect }: BookCoverPr
             <button
               onClick={(e) => {
                 e.stopPropagation();
+                playSelect();
                 onSelect();
               }}
               className="text-[8px] bg-[#8B4513] text-[#DEB887] px-2 py-1 rounded-sm hover:bg-[#A0522D] transition-colors w-full"
