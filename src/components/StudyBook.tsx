@@ -30,16 +30,16 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
             exit={{ rotateY: -90 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="relative w-[200px] h-[300px] book-hover">
+            <div className="relative w-[150px] h-[200px] book-hover">
               <div className="absolute inset-0 bg-gradient-to-l from-primary/90 to-primary rounded-lg shadow-xl border-r-4 border-primary-foreground/20">
-                <div className="h-full p-6 flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <div className="w-16 h-1 bg-primary-foreground/20 rounded-full mx-auto" />
-                    <h3 className="text-xl font-bold text-primary-foreground text-right">{title}</h3>
+                <div className="h-full p-4 flex flex-col justify-between">
+                  <div className="space-y-2">
+                    <div className="w-12 h-1 bg-primary-foreground/20 rounded-full mx-auto" />
+                    <h3 className="text-sm font-bold text-primary-foreground text-right">{title}</h3>
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 w-4 bg-primary-foreground/10 transform origin-right" 
+              <div className="absolute inset-y-0 right-0 w-3 bg-primary-foreground/10 transform origin-right" 
                    style={{ transform: 'rotateY(-20deg) translateZ(-2px)' }} />
             </div>
           </motion.div>
@@ -51,38 +51,38 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
             exit={{ rotateY: 90 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="relative w-[300px] h-[400px] bg-white rounded-lg shadow-2xl p-6">
+            <div className="relative w-[250px] h-[300px] bg-white rounded-lg shadow-2xl p-4">
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="space-y-6 text-right"
+                className="space-y-4 text-right"
               >
-                <h2 className="text-2xl font-bold text-primary">{title}</h2>
-                <div className="space-y-4">
-                  <div className="p-4 bg-primary/5 rounded-lg">
-                    <p className="text-lg">رأس المال المطلوب</p>
-                    <p className="text-2xl font-bold text-primary">{capital.toLocaleString()} جنيه</p>
+                <h2 className="text-xl font-bold text-primary">{title}</h2>
+                <div className="space-y-3">
+                  <div className="p-2 bg-primary/5 rounded-lg">
+                    <p className="text-sm">رأس المال المطلوب</p>
+                    <p className="text-lg font-bold text-primary">{capital.toLocaleString()} جنيه</p>
                   </div>
-                  <div className="p-4 bg-secondary/10 rounded-lg">
-                    <p className="text-lg">الأرباح المتوقعة</p>
-                    <p className="text-2xl font-bold text-secondary">{expectedProfit.toLocaleString()} جنيه</p>
+                  <div className="p-2 bg-secondary/10 rounded-lg">
+                    <p className="text-sm">الأرباح المتوقعة</p>
+                    <p className="text-lg font-bold text-secondary">{expectedProfit.toLocaleString()} جنيه</p>
                   </div>
-                  <div className="p-4 bg-accent/10 rounded-lg">
-                    <p className="text-lg">سعر الدراسة</p>
-                    <p className="text-2xl font-bold text-accent">{price} جنيه</p>
+                  <div className="p-2 bg-accent/10 rounded-lg">
+                    <p className="text-sm">سعر الدراسة</p>
+                    <p className="text-lg font-bold text-accent">{price} جنيه</p>
                   </div>
                 </div>
                 <Button 
                   onClick={onSelect}
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mt-4 group"
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mt-2 group text-sm"
                 >
-                  <ShoppingCart className="ml-2 h-4 w-4 transition-transform group-hover:scale-110" />
+                  <ShoppingCart className="ml-2 h-3 w-3 transition-transform group-hover:scale-110" />
                   طلب الدراسة
                 </Button>
                 <button 
                   onClick={handleClick}
-                  className="mt-4 text-sm text-primary/60 hover:text-primary"
+                  className="mt-2 text-xs text-primary/60 hover:text-primary"
                 >
                   إغلاق
                 </button>
