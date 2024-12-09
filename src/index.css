@@ -33,29 +33,22 @@
   }
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .book-hover {
   @apply transition-all duration-300;
+  transform-style: preserve-3d;
 }
 
 .perspective {
   perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
-.classic-counter {
-  font-family: "Seven Segment", monospace;
-  @apply bg-primary text-primary-foreground rounded-lg p-4 shadow-lg;
+.book-container {
+  transform-style: preserve-3d;
+  transform-origin: right center;
 }
 
-.counter-digit {
-  @apply text-4xl font-bold inline-block;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+.book-pages {
+  transform-style: preserve-3d;
+  transform-origin: right center;
 }

@@ -61,10 +61,15 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="relative min-h-[600px] bg-gradient-to-b from-primary/10 to-transparent rounded-xl p-8"
+      className="relative min-h-[600px]"
     >
-      <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-repeat-space opacity-5 mix-blend-overlay" />
-      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* خلفية الرف */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent rounded-xl">
+        <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20" />
+      </div>
+      
+      {/* الكتب */}
+      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
         {studies.map((study) => (
           <StudyBook
             key={study.id}
