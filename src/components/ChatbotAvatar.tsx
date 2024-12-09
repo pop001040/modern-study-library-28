@@ -9,7 +9,6 @@ export const ChatbotAvatar = () => {
   const [isWaving, setIsWaving] = useState(false);
 
   useEffect(() => {
-    // تأخير ظهور الشات بوت لمدة ثانيتين
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 2000);
@@ -21,7 +20,6 @@ export const ChatbotAvatar = () => {
     setIsWaving(true);
     setTimeout(() => {
       navigate('/studies');
-      // التمرير إلى قسم الدراسات
       window.scrollTo({
         top: document.getElementById('studies-section')?.offsetTop || 0,
         behavior: 'smooth'
@@ -46,9 +44,8 @@ export const ChatbotAvatar = () => {
         onHoverStart={handleHover}
       >
         <div className="relative">
-          {/* صورة الشخصية */}
           <motion.img
-            src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952"
+            src="/lovable-uploads/82199cc1-f625-4721-8601-ee8757c421ad.png"
             alt="مساعد Green Light"
             className="w-24 h-24 rounded-full object-cover border-4 border-green-500 shadow-lg"
             animate={isWaving ? {
@@ -67,7 +64,6 @@ export const ChatbotAvatar = () => {
             }}
           />
           
-          {/* فقاعة الكلام */}
           <motion.div
             className="absolute -top-32 right-0 bg-white p-4 rounded-lg shadow-md text-sm max-w-[250px] text-right"
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
