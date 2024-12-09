@@ -5,8 +5,17 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white" dir="rtl">
       <div className="container mx-auto py-16 px-4">
+        {/* Logo */}
+        <div className="absolute top-4 right-4">
+          <img 
+            src="/lovable-uploads/936de462-6c9f-4ef0-950d-b5e8182d11ae.png" 
+            alt="Green Light Logo" 
+            className="h-24 w-auto"
+          />
+        </div>
+
         <div className="text-center space-y-8">
-          <h1 className="text-4xl font-bold text-blue-900 mb-4">
+          <h1 className="text-4xl font-bold text-green-600 mb-4">
             مرحبًا بك في "Green Light"
           </h1>
           
