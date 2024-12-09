@@ -18,7 +18,7 @@ export const ChatActions = ({ onStartProject }: ChatActionsProps) => {
       <div className="flex items-center justify-center gap-2 text-green-600">
         <span>للتواصل معنا:</span>
         <Phone className="h-4 w-4" />
-        <a href="tel:01030435987" className="hover:underline">01030435987</a>
+        <a href="https://wa.me/201030435987" target="_blank" className="hover:underline">01030435987</a>
       </div>
     </div>
   );
