@@ -1,6 +1,5 @@
 import { StudyBook } from './StudyBook';
 import { motion } from 'framer-motion';
-import { ClassicCounter } from './ClassicCounter';
 import { useState } from 'react';
 
 const studies = [
@@ -135,21 +134,12 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
     onSelectStudy(study);
   };
 
-  const totalAmount = selectedStudies.reduce((sum, study) => sum + study.price, 0);
-
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="relative min-h-[800px] bg-white"
-    >
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm py-4 shadow-lg mb-8">
-        <ClassicCounter 
-          soldStudies={selectedStudies.length} 
-          totalAmount={totalAmount}
-        />
-      </div>
-      
+    >      
       {/* الكتب */}
       <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 p-8">
         {studies.map((study) => (
