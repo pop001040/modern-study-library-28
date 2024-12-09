@@ -1,56 +1,15 @@
 import { StudyBook } from './StudyBook';
 import { motion } from 'framer-motion';
 
-const studies = [
-  {
-    id: 1,
-    title: "مشروع مطعم وجبات سريعة",
-    description: "دراسة تفصيلية لمشروع مطعم ناجح",
-    capital: 500000,
-    expectedProfit: 200000,
-    price: 150,
-  },
-  {
-    id: 2,
-    title: "مشروع محل ملابس",
-    description: "خطة عمل متكاملة لمتجر أزياء",
-    capital: 300000,
-    expectedProfit: 150000,
-    price: 150,
-  },
-  {
-    id: 3,
-    title: "مشروع مركز تجميل",
-    description: "دراسة شاملة لصالون تجميل عصري",
-    capital: 400000,
-    expectedProfit: 180000,
-    price: 150,
-  },
-  {
-    id: 4,
-    title: "مشروع مقهى",
-    description: "خطة استثمارية لمقهى حديث",
-    capital: 350000,
-    expectedProfit: 160000,
-    price: 150,
-  },
-  {
-    id: 5,
-    title: "مشروع صالون حلاقة",
-    description: "دراسة متكاملة لصالون حلاقة رجالي",
-    capital: 200000,
-    expectedProfit: 100000,
-    price: 150,
-  },
-  {
-    id: 6,
-    title: "مشروع محل عطور",
-    description: "خطة عمل لمتجر عطور فاخر",
-    capital: 250000,
-    expectedProfit: 120000,
-    price: 150,
-  }
-];
+// إنشاء مصفوفة من 100 دراسة
+const studies = Array.from({ length: 100 }, (_, index) => ({
+  id: index + 1,
+  title: `دراسة جدوى ${index + 1}`,
+  description: `وصف تفصيلي لدراسة الجدوى رقم ${index + 1}`,
+  capital: Math.floor(Math.random() * 900000) + 100000, // رأس مال عشوائي بين 100,000 و 1,000,000
+  expectedProfit: Math.floor(Math.random() * 400000) + 100000, // ربح متوقع عشوائي بين 100,000 و 500,000
+  price: 150,
+}));
 
 interface StudyLibraryProps {
   onSelectStudy: (study: typeof studies[0]) => void;
@@ -75,8 +34,8 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
         />
         
         {/* رفوف المكتبة */}
-        <div className="absolute inset-0 grid grid-rows-3 gap-2 p-4">
-          {[...Array(3)].map((_, i) => (
+        <div className="absolute inset-0 grid grid-rows-5 gap-2 p-4">
+          {[...Array(5)].map((_, i) => (
             <div key={i} className="relative">
               <div className="absolute bottom-0 left-0 right-0 h-6 bg-[#654321] shadow-lg" />
               <div className="absolute bottom-6 left-0 right-0 h-1 bg-[#8B4513]/50" />
@@ -86,7 +45,7 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
       </div>
       
       {/* الكتب */}
-      <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 p-6">
+      <div className="relative grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 p-6 max-h-[800px] overflow-y-auto">
         {studies.map((study) => (
           <StudyBook
             key={study.id}
