@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion';
 import useSound from 'use-sound';
-import { LucideIcon } from 'lucide-react';
 import hoverSound from '../assets/page-flip.mp3';
 import selectSound from '../assets/book-select.mp3';
 
 interface BookCoverProps {
   title: string;
   description: string;
-  color?: string;
-  icon: LucideIcon;
   onClick: () => void;
   onSelect: () => void;
 }
@@ -21,26 +18,23 @@ const bookColors = [
   'from-[#D2691E] to-[#DEB887]',
 ];
 
-export const BookCover = ({ title, description, icon: Icon, onClick, onSelect }: BookCoverProps) => {
+export const BookCover = ({ title, description, onClick, onSelect }: BookCoverProps) => {
   const randomColor = bookColors[Math.floor(Math.random() * bookColors.length)];
   const [playHover] = useSound(hoverSound, { volume: 0.5 });
   const [playSelect] = useSound(selectSound, { volume: 0.5 });
 
   const handleClick = () => {
-    console.log('Book clicked - playing select sound');
     playSelect();
     onClick();
   };
 
   const handleSelect = (e: React.MouseEvent) => {
-    console.log('Book selected - playing select sound');
     e.stopPropagation();
     playSelect();
     onSelect();
   };
 
   const handleHover = () => {
-    console.log('Book hovered - playing hover sound');
     playHover();
   };
 
@@ -65,23 +59,10 @@ export const BookCover = ({ title, description, icon: Icon, onClick, onSelect }:
           <div className={`absolute inset-0 bg-gradient-to-l ${randomColor} rounded-sm shadow-2xl border-r-2 border-[#DEB887] book-pages`}>
             <div className="h-full p-2 flex flex-col justify-between">
               <div className="space-y-1">
-                {/* أيقونة نوع الدراسة */}
-                <div className="flex justify-center mb-2">
-                  <Icon className="w-4 h-4 text-[#DEB887]" />
-                </div>
-                
-                {/* زخرفة */}
-                <div className="w-6 h-0.5 bg-[#DEB887] rounded-full mx-auto" />
-                
                 {/* عنوان الكتاب */}
                 <h3 className="text-[8px] font-bold text-[#DEB887] text-right leading-tight drop-shadow-sm">
                   {title}
                 </h3>
-                
-                {/* وصف مختصر */}
-                <p className="text-[6px] text-[#DEB887]/80 text-right mt-1">
-                  {description}
-                </p>
               </div>
             </div>
           </div>

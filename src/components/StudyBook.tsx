@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { BookCover } from './BookCover';
 import { BookPages } from './BookPages';
-import { LucideIcon } from 'lucide-react';
 
 interface StudyBookProps {
   title: string;
@@ -10,7 +9,6 @@ interface StudyBookProps {
   capital: number;
   expectedProfit: number;
   price: number;
-  icon: LucideIcon;
   onSelect: () => void;
 }
 
@@ -19,8 +17,7 @@ export const StudyBook = ({
   description, 
   capital, 
   expectedProfit, 
-  price, 
-  icon,
+  price,
   onSelect 
 }: StudyBookProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,8 +33,6 @@ export const StudyBook = ({
           <BookCover 
             title={title} 
             description={description}
-            color=""
-            icon={icon}
             onClick={handleClick}
             onSelect={onSelect}
           />
