@@ -43,7 +43,11 @@
 }
 
 .book-hover {
-  @apply transition-all duration-300 transform hover:scale-105;
+  @apply transition-all duration-300;
+}
+
+.perspective {
+  perspective: 1000px;
 }
 
 .classic-counter {
