@@ -150,10 +150,10 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
         />
       </div>
 
-      {/* خلفية المكتبة الخشبية */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#8B4513] to-[#654321] rounded-xl shadow-2xl overflow-hidden">
+      {/* خلفية المكتبة */}
+      <div className="absolute inset-0 bg-white rounded-xl shadow-2xl overflow-hidden">
         {/* نمط خشبي */}
-        <div className="absolute inset-0 opacity-20" 
+        <div className="absolute inset-0 opacity-10" 
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")`
           }}
@@ -163,9 +163,9 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
         <div className="absolute inset-0 grid grid-rows-5 gap-8 p-8">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="relative">
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-[#4A3219] transform skew-x-12 -skew-y-3 shadow-2xl opacity-50" />
-              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-b from-[#8B4513] to-[#654321] transform -skew-x-12 shadow-xl" />
-              <div className="absolute bottom-8 left-0 right-0 h-2 bg-[#4A3219] transform -skew-x-12" />
+              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gray-100 transform skew-x-12 -skew-y-3 shadow-2xl opacity-50" />
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-b from-gray-50 to-gray-200 transform -skew-x-12 shadow-xl" />
+              <div className="absolute bottom-8 left-0 right-0 h-2 bg-gray-300 transform -skew-x-12" />
             </div>
           ))}
         </div>
