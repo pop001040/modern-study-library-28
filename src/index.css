@@ -85,18 +85,22 @@
   transform-style: preserve-3d;
   transform-origin: left center;
   transition: transform 0.3s ease-out;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 .book-container:hover {
   transform: translateY(-10px) translateZ(20px);
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
 }
 
 .book-pages {
   transform-style: preserve-3d;
   transform-origin: left center;
+  box-shadow: 
+    2px 0 5px rgba(0, 0, 0, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* إضافة تأثير الظل للكتب */
 .book-shadow {
   position: absolute;
   bottom: -10px;
@@ -107,9 +111,11 @@
   filter: blur(10px);
   transform-origin: center;
   transition: all 0.3s ease-out;
+  border-radius: 50%;
 }
 
 .book-container:hover .book-shadow {
   transform: scaleX(0.95) translateY(10px);
   opacity: 0.4;
+  filter: blur(12px);
 }
