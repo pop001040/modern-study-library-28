@@ -63,13 +63,11 @@ export const StudyLibrary = ({ onSelectStudy }: StudyLibraryProps) => {
       animate={{ opacity: 1 }}
       className="relative min-h-[600px]"
     >
-      {/* خلفية الرف */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent rounded-xl">
         <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20" />
       </div>
       
-      {/* الكتب */}
-      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+      <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4">
         {studies.map((study) => (
           <StudyBook
             key={study.id}
