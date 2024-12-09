@@ -1,8 +1,5 @@
 import { motion } from 'framer-motion';
 import useSound from 'use-sound';
-// استيراد الملفات الصوتية بشكل صحيح
-import pageFlipSound from '../assets/page-flip.mp3';
-import bookSelectSound from '../assets/book-select.mp3';
 
 interface BookCoverProps {
   title: string;
@@ -23,47 +20,29 @@ const bookColors = [
 export const BookCover = ({ title, description, onClick, onSelect }: BookCoverProps) => {
   const randomColor = bookColors[Math.floor(Math.random() * bookColors.length)];
   
-  // تكوين الأصوات مع إضافة معالجة الأخطاء
-  const [playHover] = useSound(pageFlipSound, { 
+  const [playHover] = useSound('/src/assets/page-flip.mp3', { 
     volume: 1.0,
-    onplay: () => console.log('تشغيل صوت التحويم'),
-    onplayerror: (id, error) => console.error('خطأ في تشغيل صوت التحويم:', error)
+    interrupt: true
   });
   
-  const [playSelect] = useSound(bookSelectSound, { 
+  const [playSelect] = useSound('/src/assets/book-select.mp3', { 
     volume: 1.0,
-    onplay: () => console.log('تشغيل صوت الاختيار'),
-    onplayerror: (id, error) => console.error('خطأ في تشغيل صوت الاختيار:', error)
+    interrupt: true
   });
 
   const handleClick = () => {
-    console.log('تم النقر على الكتاب - تشغيل صوت الاختيار');
-    try {
-      playSelect();
-    } catch (error) {
-      console.error('خطأ عند تشغيل صوت الاختيار:', error);
-    }
+    playSelect();
     onClick();
   };
 
   const handleSelect = (e: React.MouseEvent) => {
-    console.log('تم اختيار الكتاب - تشغيل صوت الاختيار');
     e.stopPropagation();
-    try {
-      playSelect();
-    } catch (error) {
-      console.error('خطأ عند تشغيل صوت الاختيار:', error);
-    }
+    playSelect();
     onSelect();
   };
 
   const handleHover = () => {
-    console.log('تم التحويم على الكتاب - تشغيل صوت التحويم');
-    try {
-      playHover();
-    } catch (error) {
-      console.error('خطأ عند تشغيل صوت التحويم:', error);
-    }
+    playHover();
   };
 
   return (
