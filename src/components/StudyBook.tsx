@@ -5,13 +5,14 @@ import { BookPages } from './BookPages';
 
 interface StudyBookProps {
   title: string;
+  description: string;
   capital: number;
   expectedProfit: number;
   price: number;
   onSelect: () => void;
 }
 
-export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: StudyBookProps) => {
+export const StudyBook = ({ title, description, capital, expectedProfit, price, onSelect }: StudyBookProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -22,7 +23,13 @@ export const StudyBook = ({ title, capital, expectedProfit, price, onSelect }: S
     <div className="relative perspective" dir="rtl">
       <AnimatePresence>
         {!isOpen ? (
-          <BookCover title={title} onClick={handleClick} />
+          <BookCover 
+            title={title} 
+            description={description}
+            color=""
+            onClick={handleClick}
+            onSelect={onSelect}
+          />
         ) : (
           <BookPages
             title={title}
